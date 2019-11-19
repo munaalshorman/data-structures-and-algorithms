@@ -46,12 +46,19 @@ Write a function named mapTwoToThe that produces the same output as your forLoop
 
 const mapTwoToThe = (arr) => {
     // Solution code here...
+    var newarray = arr.map(element =>(Math.pow(2, element)));
+
+
+  return newarray;
+
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
 
-Write a function named charCode that, given an array of letters as an input, uses map to return a new array where each element is the result of the `charCodeAt` method on the original array element.
+Write a function named charCode that, given an array of letters as an input, 
+uses map to return a new array where each element is the result of the `charCodeAt` method on 
+the original array element.
 
 Read the MDN documentation on String.charCodeAt() if necessary.
 
@@ -60,6 +67,10 @@ For example: charCode(['h','i']) returns [104, 105].
 
 const charCode = (arr) => {
     // Solution code here...
+    var newarray = arr.map(element =>(charCodeAt(element)));
+
+
+    return newarray;
 };
 
 /* ------------------------------------------------------------------------------------------------
