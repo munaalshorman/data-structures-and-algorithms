@@ -10,12 +10,16 @@ For example, oddValues([1,2,3]) returns [1,3].
 
 const oddValues = (arr) => {
   // Solution code here...
+  return arr.filter( n=>(n % 2));
+  
+
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
 
-Write a function named filterStringsWithVowels that, given an array of strings as input, uses filter to return an array with only words that contain vowels.
+Write a function named filterStringsWithVowels that, given an array of strings as input, 
+uses filter to return an array with only words that contain vowels.
 
 The callback function to filter should include or utilize a regular expression pattern.
 
@@ -25,13 +29,15 @@ For example, filterStringsWithVowels('gregor','hound','xyz') returns ['gregor', 
 
 const filterStringsWithVowels = (arr) => {
   // Solution code here...
+  
 };
 
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
 
-Write a function named notInFirstArray that, given two arrays as input, uses filter to return an array of all the elements in the second array that are not included in the first array.
+Write a function named notInFirstArray that, given two arrays as input, uses filter to return an array
+ of all the elements in the second array that are not included in the first array.
 
 For example, notInFirstArray([1,2,3], [1,2,3,4]) returns [4].
 ------------------------------------------------------------------------------------------------ */
@@ -43,7 +49,8 @@ const notInFirstArray = (forbiddenValues, arr) => {
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
 
-Write a function named getBaseStatGreaterThan that, given the snorlaxData, below, and an integer as input, uses filter to return an array containing all stats with a baseStat greater than the integer.
+Write a function named getBaseStatGreaterThan that, given the snorlaxData, below, and an integer as input,
+ uses filter to return an array containing all stats with a baseStat greater than the integer.
 
 For example, getBaseStatGreaterThan(snorlaxData.stats, 50) will return an array containing the 'special-defense' and 'special-attack' objects.
 ------------------------------------------------------------------------------------------------ */
