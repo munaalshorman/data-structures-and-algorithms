@@ -11,13 +11,14 @@ Note: You may not use the array's built-in length property.
 
 const countNumberOfElements = (arr) => {
   // Solution code here...
-  
+  return arr.reduce(length => length += 1)
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
 
-Write a function named returnNames that, given the Star Wars data, below, uses reduce to return an array containing the names of the characters.
+Write a function named returnNames that, given the Star Wars data, below, uses reduce to return an array
+ containing the names of the characters.
 ------------------------------------------------------------------------------------------------ */
 
 let starWarsData = [{
@@ -72,6 +73,7 @@ let starWarsData = [{
 
 const returnNames = (arr) => {
   // Solution code here...
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -144,7 +146,7 @@ CHALLENGE 5
 
 Write a function that, given an array of numbers as input, uses reduce to calculate the array's average value.
 
-Hint: The accumulator should begin as { count: 0, sum: 0 }
+Hint: The accumulator should begin as { count: 0, sum: 0 }  
 ------------------------------------------------------------------------------------------------ */
 
 const calculateAverage = (arr) => {
