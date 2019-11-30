@@ -11,7 +11,6 @@ Note: You may not use the array's built-in length property.
 ------------------------------------------------------------------------------------------------ */
 
 const countNumberOfElements = (arr) => {
-  // Solution code here...
   return arr.reduce(length => length += 1)
 };
 
@@ -74,6 +73,13 @@ let starWarsData = [{
 
 const returnNames = (arr) => {
   // Solution code here...
+  let names = arr.reduce( (accumulator,value,idx) =>
+  {
+ accumulator.push(value.name);
+  return accumulator;
+  },[]);
+  console.log(names);
+  return names;
 
 };
 
@@ -87,12 +93,21 @@ Note: You must use reduce for this challenge. You may not use the built-in .reve
 
 const reversedString = (str) => {
   // Solution code here...
+  let char = str.split('');
+  console.log(char)
+  let reversedStr = char.reduce( (acc,char1) =>
+  {
+    return char1 + acc;
+  },'');
+  console.log(reversedStr);
+  return reversedStr;
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
 
-Write a function named countNumberOfChildren that, given the array of characters, below, uses reduce to return the total number of children in the data set.
+Write a function named countNumberOfChildren that, given the array of characters, below, uses reduce to return the total 
+number of children in the data set.
 ------------------------------------------------------------------------------------------------ */
 
 const characters = [
@@ -140,6 +155,7 @@ const characters = [
 
 const countNumberOfChildren = (arr) => {
   // Solution code here...
+  
 };
 
 /* ------------------------------------------------------------------------------------------------
