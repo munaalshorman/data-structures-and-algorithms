@@ -32,7 +32,7 @@ const grandTotal = (stores) => {
   let sumArr=[];
       for (let j=0;j<hoursOpen.length;j++){
       sum = firstPike[j]+seaTac[j]+seattleCenter[j]+capHill[j]+alkiBeach[j] ;
-      console.log(sum);
+      // console.log(sum);
       sumArr.push(sum);
       }
 return sumArr;
@@ -56,8 +56,10 @@ const salesData = (hours, data) => {
   let sumArr=data;
   let sumSen=[];
       for (let j=0;j<hoursOpen.length;j++){
-     sumSen.push({`sales: '+${sum[j]}+ cookies', time: '+${hoursOpen[j]}+ a.m.'`  }) ;
-      }
+     sumSen.push(`{ sales: '${sumArr[j]} cookies', time: '${hours[j]}' `) ;
+                  // { sales: '88 cookies', time: '9 a.m.' },
+
+      } 
 return sumSen;
 };
 
