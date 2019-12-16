@@ -28,13 +28,14 @@ For example, wordsToCharList('gregor') returns ['g','r','e','g','o','r'].
 ------------------------------------------------------------------------------------------------ */
 
 const wordsToCharList = (arr) => {
-  let char=[];
-  char = arr.split('');
-  arr=[];
-  for (let i=0;i<char.length;i++){
-    arr.push(char[i])
-  }
- return arr;
+//   let char=[];
+//   char = arr.split('');
+//   arr=[];
+//   for (let i=0;i<char.length;i++){
+//     arr.push(char[i])
+//   }
+//  return arr;
+return arr.split('');
 };
 
 
@@ -97,20 +98,40 @@ You may also use other string or array methods.
 
 const splitFoods = (recipe) => {
   let result = [];
-  // Solution code here...
+    recipe.ingredients.forEach(ingredient=>{
+    let splitIng = ingredient.split(' ');
+    // console.log('splitStr',splitIng);
+    if(splitIng.length === 5){
+      result.push(`${splitIng[2]} ${splitIng[3]} ${splitIng[4]}`);
+    }else if(splitIng.length === 4){
+      result.push(`${splitIng[2]} ${splitIng[3]}`);
+    } else {
+      result.push(splitIng[2]);
+    }
+    })
+    
   return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
 Use the same recipe from Challenge 3, above.
-Write a function named stepAction that takes in the recipe and extracts the action verbs from the steps. Fortunate for you, the action verbs are the first word of each action.
+Write a function named stepAction that takes in the recipe and extracts the action verbs from the steps. 
+Fortunate for you, the action verbs are the first word of each action.
 Return a new array containing just the verbs. For example, ['Mix until evenly distributed'] returns ['Mix'].
 ------------------------------------------------------------------------------------------------ */
 
 const stepActions = (recipe) => {
-  let result = [];
+   let result = [];
   // Solution code here...
+  recipe.steps.forEach(step=>{
+    let stepSplit=[];
+    stepSplit=step.split(' ');
+    // console.log(x);
+    let stepSlice=stepSplit.slice(0,1);
+    result.push(stepSlice[0]);
+
+  })
   return result;
 };
 
@@ -134,9 +155,12 @@ const removeEvenValues = (arr) => {
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7
-Write a function named removeLastCharacters that takes in a string and a number. The numberOfCharacters argument determines how many characters will be removed from the end of the string. Return the resulting string.
-If the numberOfCharacters argument is greater than the length of the input string, the function should return an empty string.
-If the numberOfCharacters argument input is a negative number, the function should return the input string without any changes.
+Write a function named removeLastCharacters that takes in a string and a number. The numberOfCharacters argument 
+determines how many characters will be removed from the end of the string. Return the resulting string.
+If the numberOfCharacters argument is greater than the length of the input string, the function should return an empty 
+string.
+If the numberOfCharacters argument input is a negative number, the function should return the input string without 
+any changes.
 For example:
 removeLastCharacters('Gregor', 2) returns 'Greg'
 removeLastCharacters('Gregor', -2) returns 'Gregor'
@@ -145,40 +169,56 @@ removeLastCharacters('Gregor', 9) returns ''
 
 const removeLastCharacters = (str, numberOfCharacters) => {
   // Solution code here...
+  if (numberOfCharacters>0 && numberOfCharacters<str.length){return str.slice(0,str.length-2);}
+  if (numberOfCharacters<0){return str;}
+  if (numberOfCharacters>=str.length){return '';}
+
+  // return str.slice(0, str.length - numberOfCharacters);
 };
 
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 8 - Stretch Goal
-Write a function named totalSumCSV that, given a string of comma-separated values (CSV) as input. (e.g. "1,2,3"), returns the total sum of the numeric values (e.g. 6).
+Write a function named totalSumCSV that, given a string of comma-separated values (CSV) as input.
+ (e.g. "1,2,3"), returns the total sum of the numeric values (e.g. 6).
 ------------------------------------------------------------------------------------------------ */
 
 const totalSumCSV = (str) => {
   let total = 0;
   // Solution code here...
+  let strSplit=str.split(',');
+for (let i=0;i<strSplit.length;i++){
+  total=total+parseInt(strSplit[i]);
+}
   return total;
 };
 
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 9 - Stretch Goal
-Write a function named removeVowels that takes in a string and returns a new string where all the vowels of the original string have been removed.
+Write a function named removeVowels that takes in a string and returns a new string where all the vowels of the original
+ string have been removed.
 For example, removeVowels('gregor') returns 'grgr'.
 ------------------------------------------------------------------------------------------------ */
 
 const removeVowels = (str) => {
-  // Solution code here...
+  //modified from https://stackoverflow.com/questions/13829289/javascript-strip-vowels
+  return str.replace(/[aeiou]/ig, '');   //g is for global and the i is for insensitive
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 10 - Stretch Goal
-Write a function named extractVowels that takes in a string and returns an array where the first element is the original string with all the vowels removed, and the second element is a string of all the vowels that were removed, in alphabetical order.
+Write a function named extractVowels that takes in a string and returns an array where the first element is the original string with
+ all the vowels removed, and the second element is a string of all the vowels that were removed, in alphabetical order.
 For example, extractVowels('gregor') returns ['grgr', 'eo'].
 Similarly, extractVowels('The quick brown fox') returns ['Th qck brwn fx', 'eioou']
 ------------------------------------------------------------------------------------------------ */
 
 const extractVowels = (str) => {
   // Solution code here...
+  const noVowels = str.replace(/[aeiou]/ig, '');
+  const vowels = str.replace(/[^aeiou]/ig, '');
+  return [noVowels, vowels.split('').join('')];
 };
 
 /* ------------------------------------------------------------------------------------------------
