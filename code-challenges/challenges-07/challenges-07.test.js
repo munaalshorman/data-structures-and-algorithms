@@ -31,9 +31,9 @@ Write a function named forEachTwoToThe that produces the same output as your for
 
 const forEachTwoToThe = (arr) => {
     // Solution code here... 
-    let temp=[];
-    arr.forEach(element =>temp.push(Math.pow(2, element)));
-    
+    let temp = [];
+    arr.forEach(element => temp.push(Math.pow(2, element)));
+
     return temp;
 };
 
@@ -46,10 +46,10 @@ Write a function named mapTwoToThe that produces the same output as your forLoop
 
 const mapTwoToThe = (arr) => {
     // Solution code here...
-    var newarray = arr.map(element =>(Math.pow(2, element)));
+    var newarray = arr.map(element => (Math.pow(2, element)));
 
 
-  return newarray;
+    return newarray;
 
 };
 
@@ -67,7 +67,7 @@ For example: charCode(['h','i']) returns [104, 105].
 
 const charCode = (arr) => {
     // Solution code here...
-    var newarray = arr.map(element =>(charCodeAt(element)));
+    var newarray = arr.map(element => (element.charCodeAt()));
 
 
     return newarray;
@@ -76,7 +76,8 @@ const charCode = (arr) => {
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
 
-Write a function that, given an array of numbers as input, uses map to return a new array where each element is either the string "even" or the string "odd", based on each value.
+Write a function that, given an array of numbers as input, uses map to return a new array where each element is either
+ the string "even" or the string "odd", based on each value.
 
 If any element in the array is not a number, the resulting array should have the string "N/A" in its place.
 
@@ -85,6 +86,8 @@ For example: evenOdd([1,2,3]) returns ['odd','even','odd'].
 
 const evenOdd = (arr) => {
     // Solution code here...
+    return arr.map(num => typeof (num) === 'string' ? 'N/A' : num % 2 === 0 ? 'even' : 'odd');
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -92,10 +95,13 @@ CHALLENGE 6
 
 Use the snorlaxAbilities data, below, for this challenge.
 
-Write a function named extractAbilities that, given the array of abilities, uses map to create an array containing only the ability name.
+Write a function named extractAbilities that, given the array of abilities, uses map to create an array containing
+ only the ability name.
 
 Note: Because this function is expecting the array of abilities, it will be invoked as:
 extractAbilities(snorlaxAbilities.abilities)
+extractAbilities(snorlaxAbilities.abilities):['gluttony', 'cute charm', 'immunity']
+
 ------------------------------------------------------------------------------------------------ */
 
 const snorlaxAbilities = {
@@ -129,20 +135,21 @@ const snorlaxAbilities = {
     weight: 4600,
 };
 
-const extractAbilities = (arr) => {
-    // Solution code here...
-};
+const extractAbilities = (arr) => arr.map(element => element.ability.name);
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7
 
 Use the snorlaxStats data, below, for this challenge.
 
-Write a function named extractStats that, given an array of stats, uses map to return an array of objects containing the stat name and the total.
+Write a function named extractStats that, given an array of stats, uses map to return an array of objects containing
+ the stat name and the total.
 
 The total should be the sum of the effort and the baseStat.
 
 Here is an example of a single array element: { name: 'speed', total: 35 }
+
 ------------------------------------------------------------------------------------------------ */
 
 const snorlaxStats = {
@@ -178,7 +185,9 @@ const snorlaxStats = {
 
 const extractStats = (arr) => {
     // Solution code here...
+    return arr.map(element => { return { name: element.stat.name, total: element.effort + element.baseStat, } })
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
