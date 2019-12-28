@@ -8,14 +8,15 @@ Write a function named getCourseKeys that takes in the courseInfo object and ret
 
 For example: (['name', 'duration', 'topics', 'finalExam']).
 ------------------------------------------------------------------------------------------------ */
-const courseInfo = { name: 'Code 301', duration: { dayTrack: '4 weeks', eveningTrack: '8 weeks'},
+const courseInfo = {
+  name: 'Code 301', duration: { dayTrack: '4 weeks', eveningTrack: '8 weeks' },
   topics: ['SMACSS', 'APIs', 'NodeJS', 'SQL', 'jQuery', 'functional programming'],
   finalExam: true
 };
 
 const getCourseKeys = (obj) => {
- let propertie=Object.keys(courseInfo);
- return propertie;
+  let propertie = Object.keys(courseInfo);
+  return propertie;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -29,7 +30,7 @@ in the data set.
 let characters = [
   {
     name: 'Eddard',
-    spouse: 'Catelyn',
+    spous: 'Catelyn',
     children: ['Robb', 'Sansa', 'Arya', 'Bran', 'Rickon'],
     house: 'Stark'
   },
@@ -73,10 +74,10 @@ let characters = [
 
 const getHouses = (arr) => {
   let houses = [];
-  Object.values(characters).forEach(value=>{
+  Object.values(characters).forEach(value => {
     houses.push(value.house);
-   })
-  return houses; 
+  })
+  return houses;
 };
 
 /*------------------------------------------------------------------------------------------------
@@ -94,35 +95,72 @@ hasChildrenValues(characters, 'Sansa') will return false
 
 const hasChildrenValues = (arr, character) => {
   // Solution code here...
-
+  for (let i = 0; i < arr.length; i++) {
+    if (Object.values(arr)[i].name === character && Object.values(arr)[i].children.length > 0) {
+      return true;
+    }
+  }
+  return false;
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
 
-Write a function named hasChildrenEntries that is similar to your hasChildrenValues function from challenge 3, but uses the data's entries instead of its values.
+Write a function named hasChildrenEntries that is similar to your hasChildrenValues function from challenge 3, 
+but uses the data's entries instead of its values.
 
 The input and output of this function are the same as the input and output from challenge 3.
+describe('Testing challenge 4', () => {
+  test('It should return true for characters that have children', () => {
+    expect(hasChildrenEntries(characters, 'Eddard')).toBeTruthy();
+  });
+
+  test('It should return false to characters who do not have children', () => {
+    expect(hasChildrenEntries(characters, 'Jon S.')).toBeFalsy();
+  });
+});
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenEntries = (arr, character) => {
   // Solution code here...
+  for (let i = 0; i < arr.length; i++) {
+
+    if (Object.entries(arr)[i][1].name === character && Object.entries(arr)[i][1].children.length > 0) {
+      return true;
+    }
+  }
+  return false;
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
 
 Write a function named totalCharacters that takes in an array and returns the number of characters in the array.
+describe('Testing challenge 5', () => {
+  test('It should return the number of characters in the array', () => {
+    expect(totalCharacters(characters)).toStrictEqual(26);
+  });
+});
 ------------------------------------------------------------------------------------------------ */
 
 const totalCharacters = (arr) => {
   // Solution code here...
+  let count = 1;
+  Object.values(arr).forEach(property => {
+    // console.log(property.spouse);
+    count++;
+    if (property.spouse) count++;
+    count = count +property.children.length;
+
+  })
+  return count;
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6 - Stretch Goal
 
-Write a function named houseSize that takes in the array of characters and creates an object for each house containing the name of the house and the number of members.
+Write a function named houseSize that takes in the array of characters and creates an object for each house containing 
+the name of the house and the number of members.
 
 All of these objects should be added to an array named "sizes". Return the "sizes" array from the function.
 
@@ -130,8 +168,15 @@ For example: [{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, ..
 ------------------------------------------------------------------------------------------------ */
 
 const houseSize = (arr) => {
-  const sizes = [];
+  const sizes = [];                  ////////////this solution is true on replit but here is not true :((((
   // Solution code here...
+  Object.values(arr).forEach(property => {
+    let count=0;
+    count++;
+    if (property.spouse) count++;
+    count +=property.children.length;
+    sizes.push({ house: property.house, members: count })
+  })
   return sizes;
 };
 
