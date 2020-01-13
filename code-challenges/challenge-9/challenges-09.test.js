@@ -39,7 +39,8 @@ let starWarsData = [{
   skin_color: 'gold',
   eye_color: 'yellow',
   birth_year: '112BBY',
-  gender: 'n/a'},
+  gender: 'n/a'
+},
 {
   name: 'R2-D2',
   height: '96',
@@ -73,11 +74,10 @@ let starWarsData = [{
 
 const returnNames = (arr) => {
   // Solution code here...
-  let names = arr.reduce( (accumulator,value,idx) =>
-  {
- accumulator.push(value.name);
-  return accumulator;
-  },[]);
+  let names = arr.reduce((accumulator, value, idx) => {
+    accumulator.push(value.name);
+    return accumulator;
+  }, []);
   console.log(names);
   return names;
 
@@ -95,10 +95,9 @@ const reversedString = (str) => {
   // Solution code here...
   let char = str.split('');
   console.log(char)
-  let reversedStr = char.reduce( (acc,char1) =>
-  {
+  let reversedStr = char.reduce((acc, char1) => {
     return char1 + acc;
-  },'');
+  }, '');
   console.log(reversedStr);
   return reversedStr;
 };
@@ -155,7 +154,15 @@ const characters = [
 
 const countNumberOfChildren = (arr) => {
   // Solution code here...
-  
+  return arr.reduce((acc, val, indx) => {
+    if (val.children) {
+      acc = acc + val.children.length
+
+    } return acc
+  }, 0)
+
+
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -168,12 +175,20 @@ Hint: The accumulator should begin as { count: 0, sum: 0 }
 
 const calculateAverage = (arr) => {
   // Solution code here...
+  let sum = arr.reduce((acc, val, indx) => {
+    return acc = acc + val;
+  }, 0);
+
+  let average = sum / arr.length;
+
+  return average;
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
 
-Write a function named countPrimeNumbers that, given an array elements as input, uses reduce to count the number of elements that are prime numbers.
+Write a function named countPrimeNumbers that, given an array elements as input, uses reduce to count the number of 
+elements that are prime numbers.
 
 You are welcome to use the provided isPrime function.
 ------------------------------------------------------------------------------------------------ */
@@ -189,14 +204,23 @@ const isPrime = (value) => {
 
 const countPrimeNumbers = (arr) => {
   // Solution code here...
+  let primeNumCount = arr.reduce((acc, val, idx) => {
+    if (isPrime(val) === true) { return acc = acc + 1 }
+    else { return acc }
+    // console.log(isPrime(val))
+  }, 0)
+  // console.log(primeNumCount)
+  return primeNumCount;
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7 - Stretch Goal
 
-Write a function named extractState that, given the snorlaxData, below, uses reduce to return the object whose 'name' property matches the given string.
+Write a function named extractState that, given the snorlaxData, below, uses reduce to return the object whose 
+'name' property matches the given string.
 
 If the input array does not have a stat with that specific name, the function should return null.
+extractStat('speed', snorlaxData.stats)).toStrictEqual({ stat: { url: 'https://pokeapi.co/api/v2/stat/6/', name: 'speed' }, effort: 5, baseStat: 30 });
 ------------------------------------------------------------------------------------------------ */
 
 const snorlaxData = {
@@ -232,6 +256,11 @@ const snorlaxData = {
 
 const extractStat = (statName, arr) => {
   // Solution code here...
+  return arr.reduce((acc, curr) => {
+    return curr.stat.name === statName ? acc = curr : acc;
+  }, null);
+
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -246,8 +275,19 @@ Write a function named extractChildren that, given the array of characters from 
 
 const extractChildren = (arr) => {
   // Solution code here...
-};
 
+  let containA=arr.filter(data=> {return(/[a]/i.test(data.name.toLowerCase()))})
+  let containAReduce= containA.reduce((acc,val,idx)=>{
+    let arr=val.children;
+        // console.log(arr)
+        if(arr){
+  arr.forEach(ele=>{
+    // console.log(ele);
+    acc.push(ele)});}
+  return acc;
+  },[])
+  return containAReduce;  
+}
 /* ------------------------------------------------------------------------------------------------
 TESTS
 
@@ -266,7 +306,7 @@ describe('Testing challenge 1', () => {
 
 describe('Testing challenge 2', () => {
   test('It should return an array continaing the names of the characters', () => {
-    expect(returnNames(starWarsData)).toStrictEqual([ 'Luke Skywalker', 'C-3PO', 'R2-D2', 'Darth Vader', 'Leia Organa' ]);
+    expect(returnNames(starWarsData)).toStrictEqual(['Luke Skywalker', 'C-3PO', 'R2-D2', 'Darth Vader', 'Leia Organa']);
     expect(returnNames(starWarsData).length).toStrictEqual(5);
   });
 });
@@ -285,7 +325,7 @@ describe('Testing challenge 4', () => {
 
 describe('Testing challenge 5', () => {
   test('It should return the average of the numbers in the array', () => {
-    expect(calculateAverage([18, 290, 37, 4, 55, 16, 7, 85 ])).toStrictEqual(64);
+    expect(calculateAverage([18, 290, 37, 4, 55, 16, 7, 85])).toStrictEqual(64);
   });
 });
 
@@ -303,7 +343,7 @@ describe('Testing challenge 7', () => {
 
 describe('Testing challenge 8', () => {
   test('It should return an array containing the names of the children', () => {
-    expect(extractChildren(characters)).toStrictEqual([ 'Robb', 'Sansa', 'Arya', 'Bran', 'Rickon', 'Drogon', 'Rhaegal', 'Viserion', 'Margaery', 'Loras' ]);
+    expect(extractChildren(characters)).toStrictEqual(['Robb', 'Sansa', 'Arya', 'Bran', 'Rickon', 'Drogon', 'Rhaegal', 'Viserion', 'Margaery', 'Loras']);
     expect(extractChildren(characters).length).toStrictEqual(10);
   });
 });
