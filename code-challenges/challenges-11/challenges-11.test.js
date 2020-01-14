@@ -32,7 +32,9 @@ Note: if you ever need to validate an email using a regex in practice, the Inter
 
 const validateEmail = (email) => {
   // Solution code here...
-  var validemail =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  const validemail = /^\w+(\.?\w+)?@\w+(\.[com net org]+)$/g;
+
+  // var validemail =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   return validemail.test(email) ? true :false;
 };
 
@@ -66,7 +68,8 @@ const validatePhoneNumber = (phoneNumber) => {
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4 - Stretch Goal
 
-Write a function named findTagNames that iterates over an array of HTML strings and uses a regular expression pattern to return the closing tags.
+Write a function named findTagNames that iterates over an array of HTML strings and uses a regular 
+expression pattern to return the closing tags.
 
 For example, findTagNames(['<h1>Hello, world!</h1>', '<p>Welcome to my site</p>']) returns ['/h1', '/p'].
 findTagNames(['<div><h1>Hello, world!</h1></div>', '<p>Welcome to my site</p>']) returns ['/h1', '/div', '/p'].
@@ -74,6 +77,8 @@ findTagNames(['<div><h1>Hello, world!</h1></div>', '<p>Welcome to my site</p>'])
 
 const findTagNames = elements => {
   // Solution code here...
+  const regex = /\/[A-Z]+[0-9]*/gi;
+  return elements.reduce((acc, curr) => acc.concat(curr), []).toString().match(regex);
 };
 
 /* ------------------------------------------------------------------------------------------------
