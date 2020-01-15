@@ -29,7 +29,7 @@ const findHappiness = (arr) => {
   // Solution code here...
   let happinesses = [];
   arr.forEach(value => {
-    if(value.includes(':)')) {
+    if (value.includes(':)')) {
       happinesses.push(value);
     }
   })
@@ -39,13 +39,28 @@ const findHappiness = (arr) => {
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
 
-Write a function named standardizePhoneNumbers that takes in an array of phone number strings in (XXX) XXX-XXXX format and returns an array with the phone number strings in XXXXXXXXXX format.
+Write a function named standardizePhoneNumbers that takes in an array of phone number strings in 
+(XXX) XXX-XXXX format and returns an array with the phone number strings in XXXXXXXXXX format.
 
 For example, (123) 456-7890 returns 1234567890
 ------------------------------------------------------------------------------------------------ */
 
 const standardizePhoneNumbers = (arr) => {
   // Solution code here...
+  let tempArr = [];
+  arr.forEach(num => {
+
+    let justNum = [];
+    justNum.push(num.substr(1, 3))
+    justNum.push(num.substr(6, 3))
+    justNum.push(num.substr(10, 4))
+    // console.log('justNum b ', justNum)
+
+    justNum.join('');
+    // console.log('justNum ', justNum.join(''))
+    tempArr.push(justNum.join(''));
+  })
+  return tempArr
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -58,52 +73,84 @@ For example, 'abcdefg' returns 'bdf'
 
 const onlyOddChars = (str) => {
   // Solution code here...
+  let temp = [];
+  // console.log(str.length) 
+  for (let i = 0; i < str.length; i++) {
+    if (!(i % 2 === 0 || i === 0)) {
+      // console.log(str.charAt(i))
+      temp.push(str.charAt(i));
+    }
+  }
+  return temp.join('');
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
 
-Write a function named allHappy that takes in an array of strings and returns a Boolean indicating whether all those strings contain ":)".
+Write a function named allHappy that takes in an array of strings and returns a Boolean indicating whether all 
+those strings contain ":)".
 ------------------------------------------------------------------------------------------------ */
 
 const allHappy = (arr) => {
   // Solution code here...
+  return arr.every(string => string.includes(':)'));
+  //The every() method tests whether all elements in the array pass the test implemented by the provided function.
+  //  return arr.filter(str=>{return str.includes(':)')}) //[ 'apple (:)', ':)banana', 'cant:)aloupe' ]
+
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
 
-Write a function named findAnything that takes in an array of strings, along with a target string. Return an array containing only those strings from the original array that contain the target string.
+Write a function named findAnything that takes in an array of strings, along with a target string. 
+Return an array containing only those strings from the original array that contain the target string.
 ------------------------------------------------------------------------------------------------ */
 
 const findAnything = (arr, target) => {
   // Solution code here...
+  return arr.filter(str => {
+    return str.includes(target)
+  })
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7
 
-Write a function named findEvery that takes in an array of strings, along with a target string. Return a Boolean based on whether or not every string in the array contains the target string.
+Write a function named findEvery that takes in an array of strings, along with a target string.
+ Return a Boolean based on whether or not every string in the array contains the target string.
 ------------------------------------------------------------------------------------------------ */
 
 const findEvery = (arr, target) => {
   // Solution code here...
+  let allContainTarget = arr.filter(str => {return str.includes(target)});
+  if (allContainTarget.length === arr.length) { return true };
+  if (allContainTarget.length !== arr.length) { return false };
+
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 8
 
-We've been testing a new course enrollment system, and we think we have the bugs worked out, but in the meantime, Brook enrolled himself in a bunch of different classes to test if it was working.
+We've been testing a new course enrollment system, and we think we have the bugs worked out, but in the meantime, 
+Brook enrolled himself in a bunch of different classes to test if it was working.
 
-Write a function named unenrollBrook that takes in a two-dimensional array, where each array represents one course's roster and is an array of strings of the names of the people in that course.
+Write a function named unenrollBrook that takes in a two-dimensional array, where each array represents one course's 
+roster and is an array of strings of the names of the people in that course.
 
-Return a two-dimensional array with the same roster, but where anyone whose name includes Brook is removed from every course.
+Return a two-dimensional array with the same roster, but where anyone whose name includes Brook is removed from every
+ course.
 
-For example, [['Brook Testing', 'Actual Person'], ['Human Person', 'Brook again', 'still Brook']] returns [['Actual Person'], ['Human Person']]
+For example, [['Brook Testing', 'Actual Person'], ['Human Person', 'Brook again', 'still Brook']] 
+returns [['Actual Person'], ['Human Person']]
 ------------------------------------------------------------------------------------------------ */
 
 const unenrollBrook = (arr) => {
   // Solution code here...
+  const courses = [];
+  for(let i = 0; i < arr.length; i++){
+    courses.push(arr[i].filter(course => !course.includes('Brook')));
+  }
+  return courses;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -160,7 +207,7 @@ describe('Testing challenge 1', () => {
   test('It should return the first letter of each element of the array', () => {
     const words = ['apple', 'banana', 'cantaloupe'];
 
-    expect(firstLetters(words)).toStrictEqual(['a','b','c']);
+    expect(firstLetters(words)).toStrictEqual(['a', 'b', 'c']);
     expect(firstLetters(['a', 'b', 'c', 'd'])).toStrictEqual(['a', 'b', 'c', 'd']);
     expect(firstLetters([])).toStrictEqual([]);
   });
