@@ -28,14 +28,14 @@ const cookieStores = [firstPike, seaTac, seattleCenter, capHill, alkiBeach];
 
 const grandTotal = (stores) => {
 
-  let sum=0;
-  let sumArr=[];
-      for (let j=0;j<hoursOpen.length;j++){
-      sum = firstPike[j]+seaTac[j]+seattleCenter[j]+capHill[j]+alkiBeach[j] ;
-      // console.log(sum);
-      sumArr.push(sum);
-      }
-return sumArr;
+  let sum = 0;
+  let sumArr = [];
+  for (let j = 0; j < hoursOpen.length; j++) {
+    sum = firstPike[j] + seaTac[j] + seattleCenter[j] + capHill[j] + alkiBeach[j];
+    // console.log(sum);
+    sumArr.push(sum);
+  }
+  return sumArr;
 
 };
 
@@ -53,36 +53,49 @@ Write a function named salesData that uses forEach to iterate over the hourlySal
 ------------------------------------------------------------------------------------------------ */
 
 const salesData = (hours, data) => {
-  let sumArr=data;
-  let sumSen=[];
-      for (let j=0;j<hoursOpen.length;j++){
-     sumSen.push(`{ sales: '${sumArr[j]} cookies', time: '${hours[j]}' `) ;
-                  // { sales: '88 cookies', time: '9 a.m.' },
+  let sumSen = [];
+  data.forEach((hour, index) => sumSen.push({
+    sales: `${hour} cookies`,
+    time: hoursOpen[index]
+  }));
 
-      } 
-return sumSen;
+  return sumSen;
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
 
-Write a function named howManyTreats that will return the quantity of treats you need to pick up from the pet store today from this array.
+Write a function named howManyTreats that will return the quantity of treats you need to pick up from the pet store 
+today from this array.
 ------------------------------------------------------------------------------------------------ */
 
 const errands = [
-  { store: 'Grocery store',
-    items: [ { name: 'Eggs', quantity: 12 }, { name: 'Milk', quantity: 1 }, { name: 'Apples', quantity: 3 }]
+  {
+    store: 'Grocery store',
+    items: [{ name: 'Eggs', quantity: 12 }, { name: 'Milk', quantity: 1 }, { name: 'Apples', quantity: 3 }]
   },
-  { store: 'Drug store',
-    items: [ { name: 'Toothpaste', quantity: 1 }, { name: 'Toothbrush', quantity: 3 }, { name: 'Mouthwash',quantity: 1 } ]
+  {
+    store: 'Drug store',
+    items: [{ name: 'Toothpaste', quantity: 1 }, { name: 'Toothbrush', quantity: 3 }, { name: 'Mouthwash', quantity: 1 }]
   },
-  { store: 'Pet store',
-    items: [ { name: 'Cans of food', quantity: 8 }, { name: 'Treats', quantity: 24 }, { name: 'Leash', quantity: 1 } ]
+  {
+    store: 'Pet store',
+    items: [{ name: 'Cans of food', quantity: 8 }, { name: 'Treats', quantity: 24 }, { name: 'Leash', quantity: 1 }]
   }
 ];
 
 const howManyTreats = (arr) => {
   // Solution code here...
+  for (let i = 0; i <= arr.length; i++) {
+    if (arr[i].store === 'Pet store') {
+      for (let j = 0; j < arr[i].items.length; j++)
+        if (arr[i].items[j].name === 'Treats') {
+          // console.log('arr[i]',arr[i].items[j].quantity)
+          return arr[i].items[j].quantity
+        }
+
+    }
+  }
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -90,7 +103,8 @@ CHALLENGE 4
 
 Write a function named battleship that accepts a 2D array and two numbers: a row coordinate and a column coordinate.
 
-Return "hit" or "miss" depending on if there's part of a boat at that position in the array. Assume the array has only one of two values at each index. '#' for part of a boat, or ' ' for open water.
+Return "hit" or "miss" depending on if there's part of a boat at that position in the array. Assume the array has only
+one of two values at each index. '#' for part of a boat, or ' ' for open water.
 
 Here is a sample board:
 [
@@ -105,26 +119,40 @@ The top row of the board is considered row zero and row numbers increase as they
 
 const battleship = (board, row, col) => {
   //  Solution code here...
+  if (board[row][col] === '#') { return 'hit'; }
+  else { return 'miss'; }
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
 
-Write a function named calculateProduct that takes in a two-dimensional array of numbers, multiplies all of the numbers in each array, and returns the final product. This function should work for any number of inner arrays.
+Write a function named calculateProduct that takes in a two-dimensional array of numbers, multiplies all of the numbers in each array,
+ and returns the final product. This function should work for any number of inner arrays.
 
 For example, the following input returns a product of 720: [[1,2], [3,4], [5,6]]
 ------------------------------------------------------------------------------------------------ */
 
 const calculateProduct = (numbers) => {
   // Solution code here...
+  let product = 1;
+  for (let i = 0; i < numbers.length; i++) {
+    for (let j = 0; j < numbers[i].length; j++) {
+      // console.log(numbers[i][j])
+      product = product * numbers[i][j];
+    }
+  }
+  return product;
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
 
-Write a function named averageDailyTemperature that accepts a two-dimensional array representing average daily temperatures grouped week-by-week.
+Write a function named averageDailyTemperature that accepts a two-dimensional array representing average daily temperatures grouped
+week-by-week.
 
-Calculate the average daily temperature during that entire period. Your output should be a single number. Write your function so it could accept an array with any number of weeks given to it.
+Calculate the average daily temperature during that entire period. Your output should be a single number. Write your function so it
+ could accept an array with any number of weeks given to it.
 ------------------------------------------------------------------------------------------------ */
 
 // Real daily average temperatures for Seattle, October 1-28 2017
@@ -137,6 +165,16 @@ const weeklyTemperatures = [
 
 const averageDailyTemperature = (weather) => {
   // Solution code here...
+  let sum = 0;
+  let counter = 0;
+  for (let i = 0; i < weather.length; i++) {
+    for (let j = 0; j < weather[i].length; j++) {
+      // console.log(numbers[i][j])
+      sum = sum + weather[i][j];
+      counter = counter + 1;
+    }
+  }
+  return sum / counter;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -158,6 +196,22 @@ let lowestWeeklyTemperatureData = [
 
 const lowestWeeklyAverage = (weather) => {
   // Solution code here...
+  let sum = 0;
+  let weeklyAverage = [];
+  for (let i = 0; i < weather.length; i++) {
+    for (let j = 0; j < weather[i].length; j++) {
+      // console.log(numbers[i][j])
+      sum = sum + weather[i][j];
+
+    }
+    weeklyAverage.push(sum / weather[i].length);
+    sum = 0;
+  }
+
+  // console.log(weeklyAverage)
+  weeklyAverage.sort((a, b) => { return a - b });
+  // console.log(weeklyAverage)
+  return weeklyAverage[0];
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -167,13 +221,25 @@ Write a function called excel that accepts a string representing rows and column
 
 Rows are seperated by newline "\n" characters. Columns are seperated by commas. For example, '1,1,1\n4,4,4\n9,9,9' represents a 3x3 table.
 
-The function should parse the string as rows and columns and compute the sum of the values for each row. Return an array with the sum of the values in each row.
+The function should parse the string as rows and columns and compute the sum of the values for each row. Return an array with the sum of
+ the values in each row.
 
 For example, excel('1,1,1\n4,4,4\n9,9,9') returns [3, 12, 27].
 ------------------------------------------------------------------------------------------------ */
 
 const excel = (str) => {
   // Solution code here...
+  const tempArr = [];
+  const strArr = str.split('\n');
+  // console.log('strArr', strArr);
+  strArr.forEach(value => {
+    let sum = 0;
+    const strArrSplit = value.split(',');
+    strArrSplit.forEach(value => {sum += parseInt(value);});
+    tempArr.push(sum);
+  });
+  
+  return tempArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -231,7 +297,7 @@ describe('Testing challenge 4', () => {
   ];
 
   test('It should return "hit" when it hits a boat', () => {
-    expect(battleship(battleshipData, 0, 0)).toStrictEqual('hit');
+    expect().toStrictEqual('hit');
     expect(battleship(battleshipData, 1, 0)).toStrictEqual('hit');
   });
 
@@ -243,14 +309,14 @@ describe('Testing challenge 4', () => {
 
 describe('Testing challenge 5', () => {
   test('It should multiply all the numbers together', () => {
-    expect(calculateProduct([[1,2], [3,4], [5,6]])).toStrictEqual(720);
+    expect(calculateProduct([[1, 2], [3, 4], [5, 6]])).toStrictEqual(720);
   });
 
   test('It should return zero if there are any zeroes in the data', () => {
     expect(calculateProduct([[2, 3, 4, 6, 0], [4, 3, 7], [2, 4, 6]])).toStrictEqual(0);
   });
   test('It should work even if some of the arrays contain no numbers', () => {
-    expect(calculateProduct([[1,2], [], [3,4,5]])).toStrictEqual(120);
+    expect(calculateProduct([[1, 2], [], [3, 4, 5]])).toStrictEqual(120);
   });
 });
 
